@@ -2,8 +2,9 @@ var _ = require("lodash");
 var http = require("http");
 var url = require("url");
 
-var PETFINDER_KEY = "INSERT API KEY HERE";
+var PETFINDER_KEY = "";
 
+// INTERACTIONS
 function petfinder(key) {
   var self = this;
   self.KEY = key;
@@ -76,6 +77,28 @@ function petfinder(key) {
   };
 }
 
+var getAvatar = function(data){
+  if(data.media && data.media.photos){
+    var avatar = data.media.photos.photo[1].$t;
+    return avatar.substring(0, avatar.length - 11) + "500&-x.jpg";
+  } else {
+    return "";
+  }
+};
+
+var info = function (data) {
+  console.log("\t[%d] %s/%s/%s/\t%s", data.id.$t, data.name.$t, data.sex.$t, data.age.$t, getAvatar(data));
+};
+
+var infopage = function(data){
+  data = data.petfinder.pet;
+  console.log(
+    getAvatar(data),
+    data
+  ); 
+};
+
+// TESTS
 var pf = new petfinder(PETFINDER_KEY);
 
 pf.pet.getCats(94523, {"count":10}, function(data){
@@ -84,23 +107,4 @@ pf.pet.getCats(94523, {"count":10}, function(data){
 
 pf.pet.get(33004187, infopage);
 
-function getAvatar(data){
-  if(data.media && data.media.photos){
-    var avatar = data.media.photos.photo[1].$t;
-    return avatar.substring(0, avatar.length - 11) + "500&-x.jpg";
-  } else {
-    return "";
-  }
-}
 
-function info(data) {
-  console.log("\t[%d] %s/%s/%s/\t%s", data.id.$t, data.name.$t, data.sex.$t, data.age.$t, getAvatar(data));
-}
-
-function infopage(data){
-  data = data.petfinder.pet;
-  console.log(
-    getAvatar(data),
-    data
-  ); 
-}
