@@ -1,0 +1,22 @@
+{
+  "name": "tinpurr",
+  "version": "1.0.0",
+  "description": "local cat adoption tool",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ryan-McBride/tinpurr.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ryan-McBride/tinpurr/issues"
+  },
+  "homepage": "https://github.com/Ryan-McBride/tinpurr#readme",
+  "dependencies": {
+    "lodash": "^3.10.1"
+  }
+}
