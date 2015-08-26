@@ -1,7 +1,7 @@
-var _ = require("lodash");
-var http = require("http");
-var url = require("url");
-var api = require("./api_info.js");
+var _ = require('lodash');
+var http = require('http');
+var url = require('url');
+var api = require('./api_info.js');
 
 var PETFINDER_KEY = api.apiKey;
 
@@ -11,11 +11,11 @@ function petfinder(key) {
   self.KEY = key;
   self._httpOptions = function (opts) {
     var defaultOpts = {
-      "protocol": "http:",
-      "host": "api.petfinder.com",
-      "query": {
-        "format": "json",
-        "key": self.KEY
+      'protocol': 'http:',
+      'host': 'api.petfinder.com',
+      'query': {
+        'format': 'json',
+        'key': self.KEY
       }
     };
     _.defaults(defaultOpts.query, opts.query);
@@ -26,11 +26,11 @@ function petfinder(key) {
   self._httpGet = function (opts, callback) {
     var uri = url.format(opts);
     http.get(uri, function (res) {
-      var data = "";
-      res.on("data", function (chunk) {
+      var data = '';
+      res.on('data', function (chunk) {
         data += chunk.toString();
       });
-      res.on("end", function () {
+      res.on('end', function () {
         callback(JSON.parse(data));
       });
     });
@@ -39,10 +39,10 @@ function petfinder(key) {
   self.pet = {
     find: function (location, opts, callback) {
       var options = self._httpOptions({
-        "pathname": "/pet.find",
-        "query": {
-          "animal": "cat",
-          "location": location
+        'pathname': '/pet.find',
+        'query': {
+          'animal': 'cat',
+          'location': location
         }
       });
 
@@ -54,20 +54,20 @@ function petfinder(key) {
 
     get: function (id, callback) {
       var options = self._httpOptions({
-        "pathname": "/pet.get",
-        "query": {
-          "id": id
+        'pathname': '/pet.get',
+        'query': {
+          'id': id
         }
       });
       self._httpGet(options, callback);
     },
     getCats: function (location, opts, callback) {
       var options = self._httpOptions({
-        "pathname": "/pet.getRandom",
-        "query": {
-          "animal": "cat",
-          "output": "basic",
-          "location": location
+        'pathname': '/pet.getRandom',
+        'query': {
+          'animal': 'cat',
+          'output': 'basic',
+          'location': location
         }
       });
       opts = opts || {};
@@ -81,14 +81,14 @@ function petfinder(key) {
 var getAvatar = function(data){
   if(data.media && data.media.photos){
     var avatar = data.media.photos.photo[1].$t;
-    return avatar.substring(0, avatar.length - 11) + "500&-x.jpg";
+    return avatar.substring(0, avatar.length - 11) + '500&-x.jpg';
   } else {
-    return "";
+    return '';
   }
 };
 
 var info = function (data) {
-  console.log("\t[%d] %s/%s/%s/\t%s", data.id.$t, data.name.$t, data.sex.$t, data.age.$t, getAvatar(data));
+  console.log('\t[%d] %s/%s/%s/\t%s', data.id.$t, data.name.$t, data.sex.$t, data.age.$t, getAvatar(data));
 };
 
 var infopage = function(data){
@@ -102,7 +102,7 @@ var infopage = function(data){
 // TESTS
 var pf = new petfinder(PETFINDER_KEY);
 
-pf.pet.getCats(94523, {"count":10}, function(data){
+pf.pet.getCats(94523, {'count':10}, function(data){
   console.log(data.petfinder.pet.forEach(info));
 });
 
