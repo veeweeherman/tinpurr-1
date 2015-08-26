@@ -1,8 +1,9 @@
 var _ = require("lodash");
 var http = require("http");
 var url = require("url");
+var api = require("./api_info.js");
 
-var PETFINDER_KEY = "";
+var PETFINDER_KEY = api.apiKey;
 
 // INTERACTIONS
 function petfinder(key) {
