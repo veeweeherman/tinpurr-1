@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Ryan-McBride/tinpurr#readme",
   "dependencies": {
+    "angular": "^1.4.7",
     "express": "^4.13.3",
     "lodash": "^3.10.1",
     "require": "^2.4.20"

@@ -50,9 +50,10 @@ function petfinder(key) {
       var options = curr._httpOptions({
         'pathname': '/pet.getRandom',
         'query': {
+          'format': 'json',
           'animal': 'cat',
           'output': 'basic',
-          'location': location
+          'location': 19116
         }
       });
       opts = opts || {};
@@ -81,7 +82,7 @@ var infopage = function(data){
   console.log(
     getAvatar(data),
     data
-  ); 
+  );
 };
 
 // TESTS
